@@ -66,7 +66,9 @@ class Kind(BaseKind):
     def action_open(self, context):
         target = context['targets'][0]
         self.vim.command('cd %s' % target['source__root'])
-        self.vim.command('Denite file/rec')
+        command = self.vim.vars.get('project_command')
+        if command:
+            self.vim.command(command)
 
     def action_tabopen(self, context):
         target = context['targets'][0]
